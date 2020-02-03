@@ -34,12 +34,6 @@ void DatabaseConnector::hashPassword() {
 }
 
 
-
-
-
-
-
-
 QString DatabaseConnector::inputPassword()
 {
     return _inputPassword;
@@ -53,4 +47,18 @@ void DatabaseConnector::setInputPassword(const QString &inputPassword)
     _inputPassword = inputPassword;
     qDebug() << "Unhashed pass: " << _inputPassword;
     emit inputPasswordChanged();
+}
+
+void DatabaseConnector::submitRegistration(UserInfo &userInfo){
+    QSqlQuery query;
+    query.prepare("INSERT INTO User (Nick, Password, Year_of_Birth, Gender, Education, isAdmin)"
+                  "VALUES (:Nick, :Password, :Year_of_Birth, :Gender, :Education, :isAdmin )");
+
+    query.bindValue(":Nick", userInfo.username());
+    query.bindValue(":Password", userInfo.password());
+    query.bindValue(":Nick", userInfo.username());
+    query.bindValue(":Nick", userInfo.username());
+    query.bindValue(":Nick", userInfo.username());
+
+
 }

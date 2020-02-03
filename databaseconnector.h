@@ -4,6 +4,7 @@
 #include <QSqlDatabase>
 #include "connectioninfo.h"
 #include <QObject>
+#include "userinfo.h"
 
 class DatabaseConnector : public QObject
 {
@@ -16,11 +17,12 @@ public:
 
     Q_INVOKABLE void establishConnection();
     Q_INVOKABLE void hashPassword();
-
+    Q_INVOKABLE void submitRegistration(UserInfo &userInfo);
 
     QString inputPassword();
 
     void setInputPassword(const QString &inputPassword);
+
 
 
 

@@ -2,12 +2,18 @@ import QtQuick 2.0
 import QtQuick.Window 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
+import com.tylnesh.databaseconnector 1.0
+import com.tylnesh.userinfo 1.0
 
 Window {
     id: createUserWindow
     width: 800
     height: 600
     visible: true
+
+    DatabaseConnector {
+        id: db
+    }
 
     GridLayout {
         id: grid
@@ -96,7 +102,7 @@ Window {
             color: "#eaeaea"
         ComboBox {
             width: parent.width
-            id: subjectSex
+            id: gender
             model: ["Muž", "Žena", "Iné"]
         }
         }

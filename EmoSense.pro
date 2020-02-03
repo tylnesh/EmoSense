@@ -14,7 +14,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp \
     databaseconnector.cpp \
-    ultimatemagicstringobfuscator.cpp
+    ultimatemagicstringobfuscator.cpp \
+    userinfo.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,4 +33,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     databaseconnector.h \
     connectioninfo.h \
-    ultimatemagicstringobfuscator.h
+    ultimatemagicstringobfuscator.h \
+    userinfo.h
