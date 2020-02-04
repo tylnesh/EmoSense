@@ -88,7 +88,9 @@ Item {
         txtcolor: "white"
         onClicked: {
             db.inputPassword = password.text
-            db.hashPassword()
+            db.inputUsername = username.text
+            db.login()
+            //db.hashPassword()
         }
         text: "Prihlásiť sa"
 

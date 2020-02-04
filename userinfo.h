@@ -7,8 +7,11 @@ class UserInfo : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged)
-    Q_PROPERT
-
+    Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
+    Q_PROPERTY(QString yearOfBirth READ yearOfBirth WRITE setYearOfBirth NOTIFY yearOfBirthChanged)
+    Q_PROPERTY(QString gender READ gender WRITE setGender NOTIFY genderChanged)
+    Q_PROPERTY(QString education READ education WRITE setEducation NOTIFY educationChanged)
+    Q_PROPERTY(QString isAdmin READ isAdmin WRITE setIsAdmin NOTIFY isAdminChanged)
 
 public:
     explicit UserInfo(QObject *parent = nullptr);

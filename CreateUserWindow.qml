@@ -15,6 +15,10 @@ Window {
         id: db
     }
 
+    UserInfo {
+    id: info
+    }
+
     GridLayout {
         id: grid
         columns: 2
@@ -128,7 +132,16 @@ Window {
             buttonWidth: 180
             bgcolor: "green"
             txtcolor: "white"
-            onClicked: db.submitRegistration()
+            onClicked: {
+                info.username = username.text
+                info.password = password.text
+                info.yearOfBirth = yearOfBirth.text
+                info.gender = gender.currentText
+                info.education = education.currentText
+                info.isAdmin = "0"
+
+                db.submitRegistration(info)
+            }
             text: "OK"
 
         }

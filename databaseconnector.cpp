@@ -23,13 +23,31 @@ void DatabaseConnector::establishConnection(){
 }
 
 
-void DatabaseConnector::hashPassword() {
+QString DatabaseConnector::hashPassword(QString password) {
 
     UltimateMagicStringObfuscator umso;
-    QByteArray pswNsalt = inputPassword().toUtf8() ;
+    QByteArray pswNsalt = password.toUtf8() ;
     pswNsalt.append(QString::fromStdString(umso.makeSalt()).toUtf8()) ;
-    QByteArray hashedSaltedPsw = QCryptographicHash::hash(pswNsalt, QCryptographicHash::Sha256).toHex() ;
+    QString hashedSaltedPsw = QCryptographicHash::hash(pswNsalt, QCryptographicHash::Sha256).toHex() ;
     qDebug() << "hashed psw: " << hashedSaltedPsw << endl ;
+
+    return hashedSaltedPsw;
+}
+
+
+int DatabaseConnector::login(){
+    QSqlQuery query;
+    query.prepare("SELECT isAdmin FROM User WHERE Nick='"+inputUsername() +"' AND Password='"+hashPassword(inputPassword())+"'");
+
+        int isAdmin = -1;
+
+        query.exec();
+    while (query.next()) {
+          isAdmin = query.value(0).toInt();
+        }
+    //qDebug() << query.lastQuery();
+    qDebug() << isAdmin;
+    return isAdmin;
 
 }
 
@@ -45,20 +63,43 @@ void DatabaseConnector::setInputPassword(const QString &inputPassword)
         return;
 
     _inputPassword = inputPassword;
-    qDebug() << "Unhashed pass: " << _inputPassword;
     emit inputPasswordChanged();
 }
 
-void DatabaseConnector::submitRegistration(UserInfo &userInfo){
+QString DatabaseConnector::inputUsername()
+{
+    return _inputUsername;
+}
+
+void DatabaseConnector::setInputUsername(const QString &inputUsername)
+{
+    if (inputUsername == _inputUsername)
+        return;
+
+    _inputUsername = inputUsername;
+    emit inputUsernameChanged();
+}
+
+
+
+
+
+
+
+void DatabaseConnector::submitRegistration(UserInfo *userInfo){
     QSqlQuery query;
     query.prepare("INSERT INTO User (Nick, Password, Year_of_Birth, Gender, Education, isAdmin)"
                   "VALUES (:Nick, :Password, :Year_of_Birth, :Gender, :Education, :isAdmin )");
 
-    query.bindValue(":Nick", userInfo.username());
-    query.bindValue(":Password", userInfo.password());
-    query.bindValue(":Nick", userInfo.username());
-    query.bindValue(":Nick", userInfo.username());
-    query.bindValue(":Nick", userInfo.username());
+    query.bindValue(":Nick", userInfo->username());
+    query.bindValue(":Password", hashPassword(userInfo->password()));
+    query.bindValue(":Year_of_Birth", userInfo->yearOfBirth());
+    query.bindValue(":Gender", userInfo->gender());
+    query.bindValue(":Education", userInfo->education());
+    query.bindValue(":isAdmin", userInfo->isAdmin());
+    query.exec();
+    qDebug() << query.lastError();
+
 
 
 }
