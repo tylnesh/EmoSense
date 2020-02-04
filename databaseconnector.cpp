@@ -86,7 +86,7 @@ void DatabaseConnector::setInputUsername(const QString &inputUsername)
 
 
 
-void DatabaseConnector::submitRegistration(UserInfo *userInfo){
+bool DatabaseConnector::submitRegistration(UserInfo *userInfo){
     QSqlQuery query;
     query.prepare("INSERT INTO User (Nick, Password, Year_of_Birth, Gender, Education, isAdmin)"
                   "VALUES (:Nick, :Password, :Year_of_Birth, :Gender, :Education, :isAdmin )");
@@ -99,6 +99,10 @@ void DatabaseConnector::submitRegistration(UserInfo *userInfo){
     query.bindValue(":isAdmin", userInfo->isAdmin());
     query.exec();
     qDebug() << query.lastError();
+
+    if (query.lastError().isValid()) return false;
+    else return true;
+
 
 
 

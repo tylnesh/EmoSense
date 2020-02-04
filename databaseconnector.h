@@ -20,7 +20,7 @@ public:
     Q_INVOKABLE int login();
 
     Q_INVOKABLE QString hashPassword(QString password);
-    Q_INVOKABLE void submitRegistration(UserInfo *userInfo);
+    Q_INVOKABLE bool submitRegistration(UserInfo *userInfo);
 
     QString inputPassword();
     QString inputUsername();

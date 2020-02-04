@@ -9,7 +9,6 @@ Window {
     id: createUserWindow
     width: 800
     height: 600
-    visible: true
 
     DatabaseConnector {
         id: db
@@ -17,6 +16,12 @@ Window {
 
     UserInfo {
     id: info
+    }
+
+    PopupDialog {
+        id: popup
+        text: "Nesprávne vyplnené hodnoty"
+
     }
 
     GridLayout {
@@ -140,7 +145,12 @@ Window {
                 info.education = education.currentText
                 info.isAdmin = "0"
 
-                db.submitRegistration(info)
+                if (!db.submitRegistration(info)) {
+                    popup.visible = true
+                }
+                else {
+                createUserWindow.close()
+                }
             }
             text: "OK"
 

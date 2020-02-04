@@ -14,10 +14,20 @@ Item {
         db.establishConnection()
     }
 
-    Loader {
-    id: pageLoader
-    source : "CreateUserWindow.qml"
-    active : false
+    //Loader {
+    //id: pageLoader
+    //source : "CreateUserWindow.qml"
+    //active : false
+    //}
+
+    CreateUserWindow {
+        id: createUserWindow
+    }
+
+    PopupDialog {
+        id: popup
+        text: "Nesprávne prihlasovacie meno alebo heslo"
+
     }
 
 
@@ -89,8 +99,27 @@ Item {
         onClicked: {
             db.inputPassword = password.text
             db.inputUsername = username.text
-            db.login()
-            //db.hashPassword()
+
+            if (db.login() == -1) {
+                popup.visible = true
+
+            }
+
+            if (db.login() == 0) {
+            pageLoader.source = "MainMenu.qml"
+                console.log("Main Menu");
+            pageLoader.active = true
+            }
+
+            if (db.login() == 1) {
+            pageLoader.source = "AdminMenu.qml"
+                console.log("Admin Menu");
+            pageLoader.active = true
+            }
+
+
+
+
         }
         text: "Prihlásiť sa"
 
@@ -103,7 +132,8 @@ Item {
         txtcolor: "black"
         buttonWidth: 240
         onClicked: {
-            pageLoader.active = true
+            //pageLoader.active = true
+            createUserWindow.visible = true
         }
         text: "Registrovať sa"
     }

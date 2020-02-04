@@ -4,5 +4,6 @@
         <file>LoginWindow.qml</file>
         <file>CustomButton.qml</file>
         <file>CreateUserWindow.qml</file>
+        <file>PopupDialog.qml</file>
     </qresource>
 </RCC>
