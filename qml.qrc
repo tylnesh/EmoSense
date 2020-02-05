@@ -5,5 +5,9 @@
         <file>CustomButton.qml</file>
         <file>CreateUserWindow.qml</file>
         <file>PopupDialog.qml</file>
+        <file>MainMenu.qml</file>
+        <file>AdminMenu.qml</file>
+        <file>UserManagementWindow.qml</file>
+        <file>UserItemDelegate.qml</file>
     </qresource>
 </RCC>

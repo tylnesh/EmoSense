@@ -24,6 +24,10 @@ Window {
 
     }
 
+    MainMenu {
+    id: mainmenu
+    }
+
     GridLayout {
         id: grid
         columns: 2

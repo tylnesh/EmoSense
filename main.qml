@@ -12,8 +12,8 @@ Window {
     title: qsTr("EmoSense")
 
     id: mainWindow
+
     LoginWindow{
-        //anchors.centerIn: mainWindow
     }
 
 }

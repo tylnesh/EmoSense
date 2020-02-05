@@ -1,6 +1,10 @@
  #include "databaseconnector.h"
 #include "ultimatemagicstringobfuscator.h"
+
 #include <QCryptographicHash>
+#include "sqlquerymodel.h"
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 DatabaseConnector::DatabaseConnector(QObject *parent) : QObject(parent)
 {
@@ -20,6 +24,8 @@ void DatabaseConnector::establishConnection(){
 
     if(db.open()) qDebug() << "success!";
     else qDebug() << db.lastError();
+
+
 }
 
 
@@ -102,8 +108,12 @@ bool DatabaseConnector::submitRegistration(UserInfo *userInfo){
 
     if (query.lastError().isValid()) return false;
     else return true;
+}
 
 
+void DatabaseConnector::createUserModel(){
 
+    SqlQueryModel *model1 = new SqlQueryModel(0);
+    model1->setQuery("SELECT * FROM User");
 
 }

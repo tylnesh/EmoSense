@@ -11,7 +11,7 @@ Item {
 
     Component.onCompleted: {
 
-        db.establishConnection()
+        //db.establishConnection()
     }
 
     //Loader {
@@ -22,6 +22,14 @@ Item {
 
     CreateUserWindow {
         id: createUserWindow
+    }
+
+    MainMenu {
+    id: mainmenu
+    }
+
+    AdminMenu {
+    id: adminmenu
     }
 
     PopupDialog {
@@ -102,24 +110,15 @@ Item {
 
             if (db.login() == -1) {
                 popup.visible = true
-
             }
 
             if (db.login() == 0) {
-            pageLoader.source = "MainMenu.qml"
-                console.log("Main Menu");
-            pageLoader.active = true
+                mainmenu.visible = true
             }
 
             if (db.login() == 1) {
-            pageLoader.source = "AdminMenu.qml"
-                console.log("Admin Menu");
-            pageLoader.active = true
+                adminmenu.visible = true
             }
-
-
-
-
         }
         text: "Prihlásiť sa"
 
@@ -132,7 +131,6 @@ Item {
         txtcolor: "black"
         buttonWidth: 240
         onClicked: {
-            //pageLoader.active = true
             createUserWindow.visible = true
         }
         text: "Registrovať sa"

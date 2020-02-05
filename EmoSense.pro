@@ -15,7 +15,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp \
     databaseconnector.cpp \
     ultimatemagicstringobfuscator.cpp \
-    userinfo.cpp
+    userinfo.cpp \
+    sqlquerymodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -34,4 +35,7 @@ HEADERS += \
     databaseconnector.h \
     connectioninfo.h \
     ultimatemagicstringobfuscator.h \
-    userinfo.h
+    userinfo.h \
+    sqlquerymodel.h
+
+DISTFILES +=

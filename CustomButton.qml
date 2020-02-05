@@ -5,7 +5,8 @@ import QtQuick 2.0
         property color bgcolor: "white"
         property string text: "Button"
         property color txtcolor: "black"
-        property int buttonWidth: 180
+
+        property int buttonWidth: text.length * 14
         signal clicked();
 
         radius: 90
