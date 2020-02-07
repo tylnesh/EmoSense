@@ -30,14 +30,26 @@ Window {
     id: tableview
     model: userModel
     onClicked: {
+
         console.log("row: " + row);
-        console.log("valueof" +  tableview.getColumn(currentRow))
+        //console.log(userModel.record(row).value("Nick").toString())
+
+        console.log(userModel.data(userModel.index(row,2),0))
+        //userModel.setData()
+        //console.log(userModel.getData(row))
 
     }
     C1.TableViewColumn{
+        id: idColumn
         role: "idUser"
         title: "ID"
         width: 50
+
+        delegate: Text {
+
+                   text: "id: " + model.idUser
+                   font.pointSize: 20
+               }
     }
     C1.TableViewColumn{
         role: "Nick"

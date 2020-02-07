@@ -1,6 +1,7 @@
 #include "sqlquerymodel.h"
 #include <QSqlRecord>
 #include <QSqlField>
+#include <QDebug>
 
 SqlQueryModel::SqlQueryModel(QObject *parent) :
     QSqlQueryModel(parent)
@@ -23,6 +24,7 @@ void SqlQueryModel::generateRoleNames()
 {
     m_roleNames.clear();
     for( int i = 0; i < record().count(); i ++) {
+        qDebug() << record().fieldName(i).toUtf8();
         m_roleNames.insert(Qt::UserRole + i + 1, record().fieldName(i).toUtf8());
     }
 }
@@ -35,9 +37,25 @@ QVariant SqlQueryModel::data(const QModelIndex &index, int role) const
         value = QSqlQueryModel::data(index, role);
     }
     else {
+
         int columnIdx = role - Qt::UserRole - 1;
         QModelIndex modelIndex = this->index(index.row(), columnIdx);
+        qDebug() << "index.row() =" << index.row();
+        qDebug()<< "columnIdx = " << role << " - " << Qt::UserRole << "- 1" << "=" << columnIdx;
+
+
         value = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
     }
     return value;
+}
+
+QVariant SqlQueryModel::getData(const QModelIndex &index){
+     QVariant value;
+    int columnIdx = 1 - Qt::UserRole - 1;
+    QModelIndex modelIndex = this->index(index.row(), columnIdx);
+    value = QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+
+    return value;
+
+
 }

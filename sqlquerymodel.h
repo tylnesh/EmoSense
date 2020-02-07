@@ -14,8 +14,10 @@ public:
     void setQuery(const QString &query, const QSqlDatabase &db = QSqlDatabase());
     void setQuery(const QSqlQuery &query);
     QVariant data(const QModelIndex &index, int role) const;
-    QHash<int, QByteArray> roleNames() const {	return m_roleNames;	}
+    Q_INVOKABLE QHash<int, QByteArray> roleNames() const {	return m_roleNames;	}
+   // Q_INVOKABLE QSqlRecord record(int row) const;
 
+    Q_INVOKABLE QVariant getData(const QModelIndex &index);
 private:
     void generateRoleNames();
     QHash<int, QByteArray> m_roleNames;
