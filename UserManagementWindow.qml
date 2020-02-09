@@ -7,8 +7,11 @@ import com.tylnesh.databaseconnector 1.0
 
 Window {
   id: usermanagementwindow
-  width: 1000
-  height: 600
+  minimumWidth: 1000
+  minimumHeight: 600
+
+  property int cRow : 0
+
 
 
   DatabaseConnector
@@ -16,25 +19,25 @@ Window {
     id: db
   }
 
+  CreateUserWindow {
+      id: createUserWindow
+  }
+
   UserManagementDetail{
   id: detail
   }
-
-  RowLayout {
-
-      anchors.fill: usermanagementwindow
-
       C1.TableView{
-        height: 600
-        width: 800
+        height: usermanagementwindow.height
+        width: usermanagementwindow.width * 3/4
         id: tableview
         model: userModel
         onClicked: {
+            cRow = row
             console.log(userModel.data(userModel.index(row,0),0))
         }
         onDoubleClicked: {
-
-            detail.id = userModel.data(userModel.index(row,0),0)
+            cRow = row
+            detail.idUser = userModel.data(userModel.index(row,0),0)
             detail.nick = userModel.data(userModel.index(row,1),0)
             detail.year = userModel.data(userModel.index(row,3),0)
             detail.gender = userModel.data(userModel.index(row,4),0)
@@ -90,6 +93,52 @@ Window {
                 }
             }
         }
-  }
+
+      Rectangle{
+          color: "#eaeaea"
+          width: usermanagementwindow.width * 1/4
+          height: usermanagementwindow.height
+          anchors.left: tableview.right
+        ColumnLayout {
+
+            CustomButton {
+                text: "Nový"
+                onClicked: {
+                    createUserWindow.visible = true
+                }
+            }
+
+
+            CustomButton {
+                text: "Upraviť"
+                onClicked: {
+                    detail.idUser = userModel.data(userModel.index(cRow,0),0)
+                    detail.nick = userModel.data(userModel.index(cRow,1),0)
+                    detail.year = userModel.data(userModel.index(cRow,3),0)
+                    detail.gender = userModel.data(userModel.index(cRow,4),0)
+                    detail.education = userModel.data(userModel.index(cRow,5),0)
+                    detail.isAdmin = userModel.data(userModel.index(cRow,6),0)
+                    detail.visible = true
+                }
+            }
+
+            CustomButton {
+                text: "Vymazať"
+                onClicked: {
+                    //TODO: Add "Are you sure" popup
+                    db.deleteUser(userModel.data(userModel.index(cRow,0),0))
+                    userModel.refresh()
+                    tableview.model = userModel
+                }
+            }
+
+
+
+
+
+        }
+
+      }
+
 }
 

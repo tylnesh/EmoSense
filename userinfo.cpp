@@ -5,6 +5,16 @@ UserInfo::UserInfo(QObject *parent) : QObject(parent)
 
 }
 
+QString UserInfo::id(){
+    return _id;
+}
+
+void UserInfo::setId(const QString &id){
+    if (id == _id) return;
+    _id = id;
+    emit idChanged();
+}
+
 QString UserInfo::username(){
     return _username;
 }

@@ -110,6 +110,46 @@ bool DatabaseConnector::submitRegistration(UserInfo *userInfo){
     else return true;
 }
 
+bool DatabaseConnector::updateUser(UserInfo *userInfo){
+    QSqlQuery query;
+    if(userInfo->password().length()>0){
+        query.prepare("UPDATE User SET Nick=:Nick, Password=:Password, Year_of_Birth=:Year_of_Birth, Gender=:Gender, Education=:Education, isAdmin=:isAdmin WHERE idUser=:Id");
+}   else {
+    query.prepare("UPDATE User SET Nick=:Nick, Year_of_Birth=:Year_of_Birth, Gender=:Gender, Education=:Education, isAdmin=:isAdmin WHERE idUser=:Id");
+
+}
+
+    query.bindValue(":Id", userInfo->id());
+    query.bindValue(":Nick", userInfo->username());
+    query.bindValue(":Password", hashPassword(userInfo->password()));
+    query.bindValue(":Year_of_Birth", userInfo->yearOfBirth());
+    query.bindValue(":Gender", userInfo->gender());
+    query.bindValue(":Education", userInfo->education());
+
+    query.bindValue(":isAdmin", (userInfo->isAdmin().length() == 4) ? "1" : "0");
+    query.exec();
+    qDebug() << query.lastError();
+
+    if (query.lastError().isValid()) return false;
+    else return true;
+}
+
+bool DatabaseConnector::deleteUser(QString userID){
+    QSqlQuery query;
+    query.prepare("DELETE FROM User WHERE idUser=:Id");
+    query.bindValue(":Id", userID);
+    query.exec();
+    qDebug() << query.lastError();
+
+    if (query.lastError().isValid()) return false;
+    else return true;
+
+
+
+
+
+}
+
 
 void DatabaseConnector::createUserModel(){
 
@@ -117,3 +157,5 @@ void DatabaseConnector::createUserModel(){
     model1->setQuery("SELECT * FROM User");
 
 }
+
+

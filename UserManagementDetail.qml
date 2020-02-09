@@ -2,15 +2,24 @@ import QtQuick 2.0
 import QtQuick.Window 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
+import com.tylnesh.userinfo 1.0
 
     Window {
-        id: root
-        property string id: "0"
+        width: 800
+        height: 600
+
+        id: usermanagementdetail
+        property string idUser: ""
         property string nick: ""
         property string year: ""
         property string gender: ""
         property string education: ""
         property bool isAdmin: false
+        property bool isPassChanged: false
+
+        UserInfo {
+        id: info
+        }
 
         onVisibleChanged: {
 
@@ -32,7 +41,7 @@ import QtQuick.Controls 2.2
 
                 TextInput {
                     id: username
-                    text: root.nick
+                    text: usermanagementdetail.nick
                     width: usernameRect.width
                     height: usernameRect.height
                     font.pointSize: 22
@@ -57,13 +66,19 @@ import QtQuick.Controls 2.2
                     id: password
                     width: usernameRect.width
                     height: usernameRect.height
-                    text: "***********"
+                    text: "*****"
                     font.pointSize: 22
                     echoMode: TextInput.Password
 
                     onFocusChanged: {
                         if (focus)
+                        {
                             selectAll()
+                        }
+                    }
+
+                    onTextChanged: {
+                    isPassChanged = true
                     }
                 }
             }
@@ -82,7 +97,7 @@ import QtQuick.Controls 2.2
                     id: yearOfBirth
                     width: usernameRect.width
                     height: usernameRect.height
-                    text: root.year
+                    text: usermanagementdetail.year
                     font.pointSize: 22
                     onFocusChanged: {
                         if (focus)
@@ -104,7 +119,7 @@ import QtQuick.Controls 2.2
             ComboBox {
                 width: parent.width
                 id: gender
-                currentIndex: find(root.gender)
+                currentIndex: find(usermanagementdetail.gender)
                 model: ["Muž", "Žena", "Iné"]
             }
             }
@@ -122,31 +137,55 @@ import QtQuick.Controls 2.2
             ComboBox {
                 width: parent.width
                 id: education
-                currentIndex: find(root.education)
+                currentIndex: find(usermanagementdetail.education)
                 model: ["Stredná škola - výučný list", "Stredná škola - maturita", "1. stupeň vysokoškolského vzdelania", "2. stupeň vysokoškolského vzdelania", "3. stupeň vysokoškolského vzdelania"]
             }
             }
+
+            Text {
+                text: "Administrátor?"
+                font.pointSize: 22
+            }
+
+            Rectangle {
+                anchors.leftMargin: 10
+                width: 500
+                height: 40
+                color: "#eaeaea"
+            CheckBox {
+                id: admin
+            }
+            }
+
+
+
             CustomButton {
                 id: submitButton
                 buttonWidth: 180
                 bgcolor: "green"
                 txtcolor: "white"
                 onClicked: {
+                    info.id = usermanagementdetail.idUser
                     info.username = username.text
-                    info.password = password.text
+                    if(isPassChanged) {
+                        info.password = password.text
+                    }   else    {
+                        info.password = ""
+                    }
+
                     info.yearOfBirth = yearOfBirth.text
                     info.gender = gender.currentText
                     info.education = education.currentText
-                    info.isAdmin = "0"
+                    info.isAdmin = admin.checked
 
-                    if (!db.submitRegistration(info)) {
+                    if (!db.updateUser(info)) {
                         popup.visible = true
                     }
                     else {
                     createUserWindow.close()
                     }
                 }
-                text: "OK"
+                text: "Upraviť"
 
             }
 
@@ -156,7 +195,7 @@ import QtQuick.Controls 2.2
                 txtcolor: "white"
                 buttonWidth: 240
                 onClicked: {
-                    createUserWindow.close()
+                    usermanagementdetail.close()
                 }
                 text: "Zrušiť"
             }

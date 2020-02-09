@@ -11,12 +11,14 @@ SqlQueryModel::SqlQueryModel(QObject *parent) :
 void SqlQueryModel::setQuery(const QString &query, const QSqlDatabase &db)
 {
     QSqlQueryModel::setQuery(query, db);
+    _sqlQuery = QSqlQuery(query,db);
     generateRoleNames();
 }
 
 void SqlQueryModel::setQuery(const QSqlQuery & query)
 {
     QSqlQueryModel::setQuery(query);
+    _sqlQuery = QSqlQuery(query);
     generateRoleNames();
 }
 
@@ -58,4 +60,9 @@ QVariant SqlQueryModel::getData(const QModelIndex &index){
     return value;
 
 
+}
+void SqlQueryModel::refresh(){
+    this->clear();
+    this->query().clear();
+    this->setQuery(_sqlQuery);
 }

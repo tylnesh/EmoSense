@@ -6,6 +6,7 @@
 class UserInfo : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString id READ id WRITE setId NOTIFY idChanged)
     Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged)
     Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
     Q_PROPERTY(QString yearOfBirth READ yearOfBirth WRITE setYearOfBirth NOTIFY yearOfBirthChanged)
@@ -17,6 +18,7 @@ public:
     explicit UserInfo(QObject *parent = nullptr);
 
     // getters
+    QString id();
     QString username();
     QString password();
     QString yearOfBirth();
@@ -24,7 +26,9 @@ public:
     QString education();
     QString isAdmin();
 
+
     //setters
+    void setId(const QString &id);
     void setUsername(const QString &username);
     void setPassword(const QString &password);
     void setYearOfBirth(const QString &yearOfBirth);
@@ -35,6 +39,7 @@ public:
 
 
 signals:
+    void idChanged();
     void usernameChanged();
     void passwordChanged();
     void yearOfBirthChanged();
@@ -46,7 +51,7 @@ signals:
 public slots:
 
 private:
-    QString _username, _password, _yearOfBirth, _gender, _education, _isAdmin;
+    QString _id, _username, _password, _yearOfBirth, _gender, _education, _isAdmin;
 };
 
 #endif // USERINFO_H
