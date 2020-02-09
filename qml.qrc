@@ -9,5 +9,6 @@
         <file>AdminMenu.qml</file>
         <file>UserManagementWindow.qml</file>
         <file>UserItemDelegate.qml</file>
+        <file>UserManagementDetail.qml</file>
     </qresource>
 </RCC>
