@@ -127,8 +127,7 @@ Window {
                 onClicked: {
                     //TODO: Add "Are you sure" popup
                     db.deleteUser(userModel.data(userModel.index(cRow,0),0))
-                    userModel.refresh()
-                    tableview.model = userModel
+                    userModel.select()
                 }
             }
 

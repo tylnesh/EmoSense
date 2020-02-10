@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     databaseconnector.cpp \
     ultimatemagicstringobfuscator.cpp \
     userinfo.cpp \
-    sqlquerymodel.cpp
+    sqlquerymodel.cpp \
+    sqlrelationalmodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -36,6 +37,7 @@ HEADERS += \
     connectioninfo.h \
     ultimatemagicstringobfuscator.h \
     userinfo.h \
-    sqlquerymodel.h
+    sqlquerymodel.h \
+    sqlrelationalmodel.h
 
 DISTFILES +=

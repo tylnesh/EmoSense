@@ -24,6 +24,7 @@ public:
     Q_INVOKABLE bool deleteUser(QString userId);
 
     Q_INVOKABLE void createUserModel();
+    Q_INVOKABLE bool createQuestionnaire(QString name);
 
 
 

@@ -17,13 +17,14 @@ public:
     QVariant data(const QModelIndex &index, int role) const;
     Q_INVOKABLE QHash<int, QByteArray> roleNames() const {	return m_roleNames;	}
     Q_INVOKABLE void refresh();
-   // Q_INVOKABLE QSqlRecord record(int row) const;
-
     Q_INVOKABLE QVariant getData(const QModelIndex &index);
 private:
     void generateRoleNames();
     QHash<int, QByteArray> m_roleNames;
     QSqlQuery _sqlQuery;
+
+signals:
+    void dataChanged();
 };
 
 

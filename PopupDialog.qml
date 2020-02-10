@@ -31,15 +31,14 @@ import QtQuick.Window 2.3
             }
 
             Rectangle{
-                id: rect
+                id: buttonRect
                 color: bgcolor
                 width: dialogWidth
                 height: dialogHeight / 2
 
                 CustomButton {
-                    anchors.centerIn: rect
                     id: loginButton
-                    anchors.left: buttonRect.left
+                    anchors.centerIn:  buttonRect
                     buttonWidth: 180
                     bgcolor: "green"
                     txtcolor: "white"

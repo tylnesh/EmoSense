@@ -12,6 +12,10 @@ Window {
 
     }
 
+    QuestionnaireManagementWindow{
+        id:qmw
+    }
+
     GridLayout {
 
         id: grid
@@ -24,12 +28,16 @@ Window {
             text: "Spravovať dotazniky"
             bgcolor: "yellow"
             txtcolor: "black"
+            onClicked: {
+                qmw.visible = true
+            }
         }
 
         CustomButton {
             text: "Spravovať testy"
             bgcolor: "yellow"
             txtcolor: "black"
+
         }
 
         CustomButton {

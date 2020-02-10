@@ -5,6 +5,7 @@
 #include "sqlquerymodel.h"
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include "sqlrelationalmodel.h"
 
 DatabaseConnector::DatabaseConnector(QObject *parent) : QObject(parent)
 {
@@ -156,6 +157,21 @@ void DatabaseConnector::createUserModel(){
     SqlQueryModel *model1 = new SqlQueryModel(0);
     model1->setQuery("SELECT * FROM User");
 
+}
+
+
+bool DatabaseConnector::createQuestionnaire(QString name){
+    QSqlQuery query;
+    query.prepare("INSERT INTO Questionaire (Name)"
+                  "VALUES (:Name)");
+
+    query.bindValue(":Name", name);
+
+    query.exec();
+    qDebug() << query.lastError();
+
+    if (query.lastError().isValid()) return false;
+    else return true;
 }
 
 

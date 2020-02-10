@@ -10,5 +10,8 @@
         <file>UserManagementWindow.qml</file>
         <file>UserItemDelegate.qml</file>
         <file>UserManagementDetail.qml</file>
+        <file>QuestionnaireManagementWindow.qml</file>
+        <file>CreateQuestionnaireWindow.qml</file>
+        <file>QuestionnaireManagementDetail.qml</file>
     </qresource>
 </RCC>

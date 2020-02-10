@@ -4,6 +4,7 @@
 #include "databaseconnector.h"
 #include "userinfo.h"
 #include "sqlquerymodel.h"
+#include "sqlrelationalmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,13 +18,27 @@ int main(int argc, char *argv[])
     db.establishConnection();
 
 
-    SqlQueryModel *model1 = new SqlQueryModel(0);
-    model1->setQuery("SELECT * FROM User");
+   // SqlQueryModel *userModel = new SqlQueryModel(0);
+   // userModel->setQuery("SELECT * FROM User");
+
+    SqlRelationalModel *questionnaireModel = new SqlRelationalModel;
+
+    questionnaireModel->setTable("Questionaire");
+    questionnaireModel->generateRoleNames();
+    questionnaireModel->select();
+
+    SqlRelationalModel *userModel = new SqlRelationalModel;
+
+    userModel->setTable("User");
+    userModel->generateRoleNames();
+    userModel->select();
+
 
 
 
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("userModel", model1);
+    engine.rootContext()->setContextProperty("userModel", userModel);
+    engine.rootContext()->setContextProperty("questionnaireModel",questionnaireModel);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
 

@@ -182,8 +182,7 @@ import com.tylnesh.userinfo 1.0
                         popup.visible = true
                     }
                     else {
-                        userModel.select()
-                        usermanagementdetail.close()
+                    createUserWindow.close()
                     }
                 }
                 text: "Upraviť"
@@ -196,9 +195,7 @@ import com.tylnesh.userinfo 1.0
                 txtcolor: "white"
                 buttonWidth: 240
                 onClicked: {
-                    userModel.select
                     usermanagementdetail.close()
-
                 }
                 text: "Zrušiť"
             }

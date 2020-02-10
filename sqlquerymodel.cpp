@@ -65,4 +65,5 @@ void SqlQueryModel::refresh(){
     this->clear();
     this->query().clear();
     this->setQuery(_sqlQuery);
+    emit dataChanged();
 }

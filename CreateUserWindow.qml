@@ -153,7 +153,8 @@ Window {
                     popup.visible = true
                 }
                 else {
-                createUserWindow.close()
+                    userModel.select()
+                    createUserWindow.close()
                 }
             }
             text: "OK"
