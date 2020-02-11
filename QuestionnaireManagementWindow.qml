@@ -32,15 +32,22 @@ Window {
         id: tableview
         model: questionnaireModel
         onClicked: {
-
+            cRow = row
         }
         onDoubleClicked: {
-
+            cRow = row
+            detail.idUser = userModel.data(userModel.index(row,0),0)
+            detail.nick = userModel.data(userModel.index(row,1),0)
+            detail.year = userModel.data(userModel.index(row,3),0)
+            detail.gender = userModel.data(userModel.index(row,4),0)
+            detail.education = userModel.data(userModel.index(row,5),0)
+            detail.isAdmin = userModel.data(userModel.index(row,6),0)
+            detail.visible = true
         }
 
 
         C1.TableViewColumn{
-            role: "idQuestionaire"
+            role: "idQuestionnaire"
             title: "ID"
             width: 100
         }
@@ -99,7 +106,9 @@ Window {
                 text: "Vymazať"
                 onClicked: {
                     //TODO: implement deletequestionnaire method
+                    console.log(questionnaireModel.data(questionnaireModel.index(cRow,0),0))
                     db.deleteQuestionnaire(questionnaireModel.data(questionnaireModel.index(cRow,0),0))
+                    questionnaireModel.select()
                 }
             }
 

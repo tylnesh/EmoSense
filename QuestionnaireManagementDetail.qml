@@ -2,24 +2,13 @@ import QtQuick 2.0
 import QtQuick.Window 2.3
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
-import com.tylnesh.userinfo 1.0
 
     Window {
         width: 800
         height: 600
 
-        id: usermanagementdetail
-        property string idUser: ""
-        property string nick: ""
-        property string year: ""
-        property string gender: ""
-        property string education: ""
-        property bool isAdmin: false
-        property bool isPassChanged: false
-
-        UserInfo {
-        id: info
-        }
+        id: questionnairemanagementdetail
+        property string idQuestionnaire: ""
 
         onVisibleChanged: {
 
@@ -29,21 +18,21 @@ import com.tylnesh.userinfo 1.0
             id: grid
             columns: 2
             Text {
-                text: "Prihlasovacie meno:"
+                text: "Názov dotazníka:"
                 font.pointSize: 22
             }
             Rectangle {
                 anchors.leftMargin: 10
-
+                id: questionnaireNameRect
                 width: 500
                 height: 40
                 color: "#eaeaea"
 
                 TextInput {
-                    id: username
-                    text: usermanagementdetail.nick
-                    width: usernameRect.width
-                    height: usernameRect.height
+                    id: nameQuestionnaire
+                    text: questionnairemanagementdetail.nick
+                    width: questionnaireNameRect.width
+                    height: questionnaireNameRect.height
                     font.pointSize: 22
 
                     onFocusChanged: {
@@ -52,110 +41,8 @@ import com.tylnesh.userinfo 1.0
                     }
                 }
             }
-            Text {
-                text: "Heslo:"
-                font.pointSize: 22
-            }
 
-            Rectangle {
-                anchors.leftMargin: 10
-                width: 500
-                height: 40
-                color: "#eaeaea"
-                TextInput {
-                    id: password
-                    width: usernameRect.width
-                    height: usernameRect.height
-                    text: "*****"
-                    font.pointSize: 22
-                    echoMode: TextInput.Password
 
-                    onFocusChanged: {
-                        if (focus)
-                        {
-                            selectAll()
-                        }
-                    }
-
-                    onTextChanged: {
-                    isPassChanged = true
-                    }
-                }
-            }
-
-            Text {
-                text: "Rok narodenia:"
-                font.pointSize: 22
-            }
-
-            Rectangle {
-                anchors.leftMargin: 10
-                width: 500
-                height: 40
-                color: "#eaeaea"
-                TextInput {
-                    id: yearOfBirth
-                    width: usernameRect.width
-                    height: usernameRect.height
-                    text: usermanagementdetail.year
-                    font.pointSize: 22
-                    onFocusChanged: {
-                        if (focus)
-                            selectAll()
-                    }
-                }
-            }
-
-            Text {
-                text: "Pohlavie:"
-                font.pointSize: 22
-            }
-
-            Rectangle {
-                anchors.leftMargin: 10
-                width: 500
-                height: 40
-                color: "#eaeaea"
-            ComboBox {
-                width: parent.width
-                id: gender
-                currentIndex: find(usermanagementdetail.gender)
-                model: ["Muž", "Žena", "Iné"]
-            }
-            }
-
-            Text {
-                text: "Dosiahnuté vzdelanie:"
-                font.pointSize: 22
-            }
-
-            Rectangle {
-                anchors.leftMargin: 10
-                width: 500
-                height: 40
-                color: "#eaeaea"
-            ComboBox {
-                width: parent.width
-                id: education
-                currentIndex: find(usermanagementdetail.education)
-                model: ["Stredná škola - výučný list", "Stredná škola - maturita", "1. stupeň vysokoškolského vzdelania", "2. stupeň vysokoškolského vzdelania", "3. stupeň vysokoškolského vzdelania"]
-            }
-            }
-
-            Text {
-                text: "Administrátor?"
-                font.pointSize: 22
-            }
-
-            Rectangle {
-                anchors.leftMargin: 10
-                width: 500
-                height: 40
-                color: "#eaeaea"
-            CheckBox {
-                id: admin
-            }
-            }
 
 
 
@@ -165,8 +52,8 @@ import com.tylnesh.userinfo 1.0
                 bgcolor: "green"
                 txtcolor: "white"
                 onClicked: {
-                    info.id = usermanagementdetail.idUser
-                    info.username = username.text
+                    info.id = questionnairemanagementdetail.idquestionnaire
+                    info.questionnairename = questionnairename.text
                     if(isPassChanged) {
                         info.password = password.text
                     }   else    {
@@ -178,11 +65,11 @@ import com.tylnesh.userinfo 1.0
                     info.education = education.currentText
                     info.isAdmin = admin.checked
 
-                    if (!db.updateUser(info)) {
+                    if (!db.updatequestionnaire(info)) {
                         popup.visible = true
                     }
                     else {
-                    createUserWindow.close()
+                    createquestionnaireWindow.close()
                     }
                 }
                 text: "Upraviť"
@@ -195,7 +82,7 @@ import com.tylnesh.userinfo 1.0
                 txtcolor: "white"
                 buttonWidth: 240
                 onClicked: {
-                    usermanagementdetail.close()
+                    questionnairemanagementdetail.close()
                 }
                 text: "Zrušiť"
             }

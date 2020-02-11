@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 
     SqlRelationalModel *questionnaireModel = new SqlRelationalModel;
 
-    questionnaireModel->setTable("Questionaire");
+    questionnaireModel->setTable("Questionnaire");
     questionnaireModel->generateRoleNames();
     questionnaireModel->select();
 
