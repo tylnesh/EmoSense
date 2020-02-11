@@ -1,4 +1,4 @@
- #include "databaseconnector.h"
+B #include "databaseconnector.h"
 #include "ultimatemagicstringobfuscator.h"
 
 #include <QCryptographicHash>
@@ -144,11 +144,17 @@ bool DatabaseConnector::deleteUser(QString userID){
 
     if (query.lastError().isValid()) return false;
     else return true;
+}
 
+bool DatabaseConnector::deleteQuestionnaire(QString questionnaireID){
+    QSqlQuery query;
+    query.prepare("DELETE FROM Questionnaire WHERE idUser=:Id");
+    query.bindValue(":Id", userID);
+    query.exec();
+    qDebug() << query.lastError();
 
-
-
-
+    if (query.lastError().isValid()) return false;
+    else return true;
 }
 
 
@@ -162,7 +168,7 @@ void DatabaseConnector::createUserModel(){
 
 bool DatabaseConnector::createQuestionnaire(QString name){
     QSqlQuery query;
-    query.prepare("INSERT INTO Questionaire (Name)"
+    query.prepare("INSERT INTO Questionnaire (Name)"
                   "VALUES (:Name)");
 
     query.bindValue(":Name", name);
