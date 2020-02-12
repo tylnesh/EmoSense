@@ -20,7 +20,11 @@ public:
 
     Q_INVOKABLE QString hashPassword(QString password);
     Q_INVOKABLE bool submitRegistration(UserInfo *userInfo);
+
+
     Q_INVOKABLE bool updateUser(UserInfo *userInfo);
+    Q_INVOKABLE bool updateQuestionnaireName(QString name);
+
     Q_INVOKABLE bool deleteUser(QString userId);
     Q_INVOKABLE bool deleteQuestionnaire(QString questionnaireId);
 

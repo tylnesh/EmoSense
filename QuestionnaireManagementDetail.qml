@@ -8,8 +8,8 @@ import QtQuick.Controls 2.2
         height: 600
 
         id: questionnairemanagementdetail
-        property string idQuestionnaire: ""
-        property string nameQuestionnaire: ""
+        property string id: ""
+        property string name: ""
 
         onVisibleChanged: {
 
@@ -17,11 +17,13 @@ import QtQuick.Controls 2.2
 
         GridLayout {
             id: grid
-            columns: 2
+            columns: 3
             Text {
                 text: "Názov dotazníka:"
                 font.pointSize: 22
             }
+
+            Rectangle {}
             Rectangle {
                 anchors.leftMargin: 10
                 id: questionnaireNameRect
@@ -31,7 +33,7 @@ import QtQuick.Controls 2.2
 
                 TextInput {
                     id: nameQuestionnaire
-                    text: questionnairemanagementdetail.nick
+                    text: questionnairemanagementdetail.name
                     width: questionnaireNameRect.width
                     height: questionnaireNameRect.height
 
@@ -44,37 +46,35 @@ import QtQuick.Controls 2.2
                 }
             }
 
-
-
-
-
             CustomButton {
                 id: submitButton
                 buttonWidth: 180
                 bgcolor: "green"
                 txtcolor: "white"
                 onClicked: {
-                    info.id = questionnairemanagementdetail.idquestionnaire
-                    info.questionnairename = questionnairename.text
-                    if(isPassChanged) {
-                        info.password = password.text
-                    }   else    {
-                        info.password = ""
-                    }
-
-
-
-                    if (!db.updatequestionnaire(info)) {
-                        popup.visible = true
-                    }
-                    else {
+                        db.updateQuestionnaireName(nameQuestionnaire.text)
                         questionnaireModel.select()
-                        createquestionnaireWindow.close()
+                        questionnairemanagementdetail.close()
                     }
-                }
-                text: "Upraviť"
+
+                text: "Uložiť zmeny"
 
             }
+
+            CustomButton {
+                id: questionsButton
+                buttonWidth: 180
+                bgcolor: "yellow"
+                txtcolor: "white"
+                onClicked: {
+
+                }
+                text: "Pridať / odobrať otázky"
+
+            }
+
+
+
 
             CustomButton {
                 id: cancelButton

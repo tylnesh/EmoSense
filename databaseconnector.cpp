@@ -135,6 +135,33 @@ bool DatabaseConnector::updateUser(UserInfo *userInfo){
     else return true;
 }
 
+
+bool DatabaseConnector::updateQuestionnaireName(QString name)
+{
+    QSqlQuery query;
+
+    query.prepare("UPDATE Questionnaire SET Name=:Name WHERE idUser=:Id");
+
+}
+
+    query.bindValue(":Id", userInfo->id());
+    query.bindValue(":Nick", userInfo->username());
+    query.bindValue(":Password", hashPassword(userInfo->password()));
+    query.bindValue(":Year_of_Birth", userInfo->yearOfBirth());
+    query.bindValue(":Gender", userInfo->gender());
+    query.bindValue(":Education", userInfo->education());
+
+    query.bindValue(":isAdmin", (userInfo->isAdmin().length() == 4) ? "1" : "0");
+    query.exec();
+    qDebug() << query.lastError();
+
+    if (query.lastError().isValid()) return false;
+    else return true;
+
+}
+
+
+
 bool DatabaseConnector::deleteUser(QString userID){
     QSqlQuery query;
     query.prepare("DELETE FROM User WHERE idUser=:Id");
