@@ -9,6 +9,7 @@ import QtQuick.Controls 2.2
 
         id: questionnairemanagementdetail
         property string idQuestionnaire: ""
+        property string nameQuestionnaire: ""
 
         onVisibleChanged: {
 
@@ -33,6 +34,7 @@ import QtQuick.Controls 2.2
                     text: questionnairemanagementdetail.nick
                     width: questionnaireNameRect.width
                     height: questionnaireNameRect.height
+
                     font.pointSize: 22
 
                     onFocusChanged: {
@@ -60,16 +62,14 @@ import QtQuick.Controls 2.2
                         info.password = ""
                     }
 
-                    info.yearOfBirth = yearOfBirth.text
-                    info.gender = gender.currentText
-                    info.education = education.currentText
-                    info.isAdmin = admin.checked
+
 
                     if (!db.updatequestionnaire(info)) {
                         popup.visible = true
                     }
                     else {
-                    createquestionnaireWindow.close()
+                        questionnaireModel.select()
+                        createquestionnaireWindow.close()
                     }
                 }
                 text: "Upraviť"

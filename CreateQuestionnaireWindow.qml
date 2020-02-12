@@ -61,8 +61,8 @@ Window {
                     popup.visible = true
                 }
                 else {
-                questionnaireModel.select()
-                createquestionnairewindow.close()
+                    questionnaireModel.select()
+                    createquestionnairewindow.close()
                 }
             }
             text: "OK"
