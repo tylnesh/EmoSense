@@ -2,12 +2,14 @@ import QtQuick 2.0
 import QtGraphicalEffects 1.0
 import QtQuick.Layouts 1.3
 import com.tylnesh.databaseconnector 1.0
+import QtQuick.Window 2.3
 
 
 Item {
     id: loginContainer
-    width: 640
-    height: 480
+    width:  loginButton.width + registerButton.width + 40
+    height:  480
+
 
     Component.onCompleted: {
 
@@ -48,7 +50,7 @@ Item {
 
     Rectangle {
         id: usernameRect
-        width: 500
+        width: loginContainer.width - 20
         height: 40
         color: "#eaeaea"
         TextInput {
@@ -69,7 +71,7 @@ Item {
 
     Rectangle {
         id: passwordRect
-        width: 500
+        width: usernameRect.width
         height: 40
         color: "#eaeaea"
         TextInput {
@@ -101,7 +103,7 @@ Item {
     CustomButton {
         id: loginButton
         anchors.left: buttonRect.left
-        buttonWidth: 180
+        //buttonWidth: 180
         bgcolor: "green"
         txtcolor: "white"
         onClicked: {
@@ -129,7 +131,7 @@ Item {
         anchors.right: buttonRect.right
         bgcolor: "yellow"
         txtcolor: "black"
-        buttonWidth: 240
+        //buttonWidth: 240
         onClicked: {
             createUserWindow.visible = true
         }

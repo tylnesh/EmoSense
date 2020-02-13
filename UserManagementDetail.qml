@@ -161,7 +161,6 @@ import com.tylnesh.userinfo 1.0
 
             CustomButton {
                 id: submitButton
-                buttonWidth: 180
                 bgcolor: "green"
                 txtcolor: "white"
                 onClicked: {
@@ -194,7 +193,6 @@ import com.tylnesh.userinfo 1.0
                 id: cancelButton
                 bgcolor: "red"
                 txtcolor: "white"
-                buttonWidth: 240
                 onClicked: {
                     userModel.select
                     usermanagementdetail.close()

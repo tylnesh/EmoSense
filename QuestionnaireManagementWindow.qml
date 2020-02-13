@@ -37,8 +37,8 @@ Window {
     }
     onDoubleClicked: {
         cRow = row
-        detail.idQuestionnaire = questionnaireModel.data(questionnaireModel.index(cRow,0),0)
-        detail.nameQuestionnaire = questionnaireModel.data(questionnaireModel.index(cRow,1),0)
+        detail.id = questionnaireModel.data(questionnaireModel.index(cRow,0),0)
+        detail.name = questionnaireModel.data(questionnaireModel.index(cRow,1),0)
         detail.visible = true
     }
 
@@ -93,8 +93,8 @@ Window {
         CustomButton {
             text: "Upraviť"
             onClicked: {
-                detail.idQuestionnaire = questionnaireModel.data(questionnaireModel.index(cRow,0),0)
-                detail.nameQuestionnaire = questionnaireModel.data(questionnaireModel.index(cRow,1),0)
+                detail.id = questionnaireModel.data(questionnaireModel.index(cRow,0),0)
+                detail.name = questionnaireModel.data(questionnaireModel.index(cRow,1),0)
 
                 detail.visible = true
             }

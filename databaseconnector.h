@@ -23,13 +23,13 @@ public:
 
 
     Q_INVOKABLE bool updateUser(UserInfo *userInfo);
-    Q_INVOKABLE bool updateQuestionnaireName(QString name);
+    Q_INVOKABLE bool updateQuestionnaireName(QString id, QString name);
 
     Q_INVOKABLE bool deleteUser(QString userId);
     Q_INVOKABLE bool deleteQuestionnaire(QString questionnaireId);
 
     Q_INVOKABLE void createUserModel();
-    Q_INVOKABLE bool createQuestionnaire(QString name);
+    Q_INVOKABLE bool createQuestionnaire( QString name);
 
 
 

@@ -19,11 +19,14 @@ import QtQuick.Controls 2.2
             id: grid
             columns: 3
             Text {
-                text: "Názov dotazníka:"
+                text: "Názov dotazníka"
                 font.pointSize: 22
             }
 
-            Rectangle {}
+            Text {
+                text: ":"
+                font.pointSize: 22
+            }
             Rectangle {
                 anchors.leftMargin: 10
                 id: questionnaireNameRect
@@ -48,11 +51,10 @@ import QtQuick.Controls 2.2
 
             CustomButton {
                 id: submitButton
-                buttonWidth: 180
                 bgcolor: "green"
                 txtcolor: "white"
                 onClicked: {
-                        db.updateQuestionnaireName(nameQuestionnaire.text)
+                        db.updateQuestionnaireName(id, nameQuestionnaire.text)
                         questionnaireModel.select()
                         questionnairemanagementdetail.close()
                     }
@@ -63,7 +65,6 @@ import QtQuick.Controls 2.2
 
             CustomButton {
                 id: questionsButton
-                buttonWidth: 180
                 bgcolor: "yellow"
                 txtcolor: "white"
                 onClicked: {
@@ -80,7 +81,6 @@ import QtQuick.Controls 2.2
                 id: cancelButton
                 bgcolor: "red"
                 txtcolor: "white"
-                buttonWidth: 240
                 onClicked: {
                     questionnairemanagementdetail.close()
                 }

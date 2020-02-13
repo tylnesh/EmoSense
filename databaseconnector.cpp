@@ -136,22 +136,16 @@ bool DatabaseConnector::updateUser(UserInfo *userInfo){
 }
 
 
-bool DatabaseConnector::updateQuestionnaireName(QString name)
+bool DatabaseConnector::updateQuestionnaireName(QString id, QString name)
 {
     QSqlQuery query;
 
-    query.prepare("UPDATE Questionnaire SET Name=:Name WHERE idUser=:Id");
+    query.prepare("UPDATE Questionnaire SET Name=:Name WHERE idQuestionnaire=:Id");
 
-}
 
-    query.bindValue(":Id", userInfo->id());
-    query.bindValue(":Nick", userInfo->username());
-    query.bindValue(":Password", hashPassword(userInfo->password()));
-    query.bindValue(":Year_of_Birth", userInfo->yearOfBirth());
-    query.bindValue(":Gender", userInfo->gender());
-    query.bindValue(":Education", userInfo->education());
 
-    query.bindValue(":isAdmin", (userInfo->isAdmin().length() == 4) ? "1" : "0");
+    query.bindValue(":Id", id);
+    query.bindValue(":Name", name);
     query.exec();
     qDebug() << query.lastError();
 
