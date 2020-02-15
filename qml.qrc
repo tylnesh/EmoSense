@@ -13,5 +13,6 @@
         <file>QuestionnaireManagementWindow.qml</file>
         <file>CreateQuestionnaireWindow.qml</file>
         <file>QuestionnaireManagementDetail.qml</file>
+        <file>QuestionnaireQuestionsWindow.qml</file>
     </qresource>
 </RCC>

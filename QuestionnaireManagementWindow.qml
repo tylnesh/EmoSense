@@ -103,7 +103,6 @@ Window {
         CustomButton {
             text: "Vymazať"
             onClicked: {
-                //TODO: implement deletequestionnaire method
                 console.log(questionnaireModel.data(questionnaireModel.index(cRow,0),0))
                 db.deleteQuestionnaire(questionnaireModel.data(questionnaireModel.index(cRow,0),0))
                 questionnaireModel.select()

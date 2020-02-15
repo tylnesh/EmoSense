@@ -11,10 +11,9 @@ import QtQuick.Controls 2.2
         property string id: ""
         property string name: ""
 
-        onVisibleChanged: {
-
+        QuestionnaireQuestionsWindow{
+        id: questionnaireQuestionsWindow
         }
-
         GridLayout {
             id: grid
             columns: 3
@@ -68,6 +67,7 @@ import QtQuick.Controls 2.2
                 bgcolor: "yellow"
                 txtcolor: "white"
                 onClicked: {
+                    questionnaireQuestionsWindow.visible = true
 
                 }
                 text: "Pridať / odobrať otázky"
